@@ -33,11 +33,13 @@ def last_quote_write(QUOTES_DIR) -> None:
 
 def user_add_quote(QUOTES_DIR) -> None:
     line = {}
-    quote = input("Enter Quote: ")
+    quote = input("Enter Quote: ").strip()
     if quote == "":
         print("No input received")
         return
-    author = input("Enter Author: ")
+    author = input("Enter Author: ").strip()
+    if author == "":
+        author = "NULL"
     if quote_exists(QUOTES_DIR, quote, author) == 1:
         print("Quote already in storage")
         return

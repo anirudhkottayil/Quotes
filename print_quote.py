@@ -68,29 +68,19 @@ def check_cache(QUOTES_DIR) -> int:
 
         file.seek(pos)
         line = file.readline()
-        file.seek(pos)
-        file.truncate()
 
         content = json.loads(line)
         if write_into_last_shown(QUOTES_DIR, content):
             return -1
+
+        file.seek(pos)
+        file.truncate()
+
         print(f"{content["q"]} - {content["a"]}")
         return 0
 
 def print_quote(QUOTES_DIR, url):
     ret_val = check_cache(QUOTES_DIR)
-    # if  ret_val== 1:
-    #     if get_quotes(QUOTES_DIR, url) == 1:
-    #         print("Failed")
-    #         return 1
-    #     if check_cache(QUOTES_DIR) != 0:
-    #         print("Failed")
-    #         return 1
-    #     return 0
-    # elif ret_val == -1:
-    #     return 1
-    # else:
-    #     return 0
     if ret_val == 0:
         return 0
     elif ret_val == -1:
