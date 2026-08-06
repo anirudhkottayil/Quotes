@@ -24,10 +24,10 @@
 
 ## Install
 
-Requires [Python 3.8+](https://www.python.org/downloads/) and [pipx](https://pipx.pypa.io/latest/how-to/install-pipx.html).
+Requires [Python 3.10+](https://www.python.org/downloads/) and [pipx](https://pipx.pypa.io/latest/how-to/install-pipx.html).
 
 ```
-pipx install git+https://github.com/anirudhkottayil/Quotes
+pipx install git+https://github.com/anirudhkottayil/Quotes.git
 ```
 
 ## Usage
