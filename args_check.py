@@ -55,6 +55,9 @@ def print_random_quote(QUOTES_DIR) -> None:
             line = line.strip()
             if line:
                 quotes.append(json.loads(line))
+    if quotes == []:
+        print("No saved quotes to choose from")
+        return
     quote = random.choice(quotes)
     print(f"{quote["q"]} - {quote["a"]}")
 
