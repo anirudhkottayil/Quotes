@@ -78,13 +78,28 @@ def check_cache(QUOTES_DIR) -> int:
         return 0
 
 def print_quote(QUOTES_DIR, url):
-    if check_cache(QUOTES_DIR) == 1:
-        if get_quotes(QUOTES_DIR, url) == 1:
+    ret_val = check_cache(QUOTES_DIR)
+    # if  ret_val== 1:
+    #     if get_quotes(QUOTES_DIR, url) == 1:
+    #         print("Failed")
+    #         return 1
+    #     if check_cache(QUOTES_DIR) != 0:
+    #         print("Failed")
+    #         return 1
+    #     return 0
+    # elif ret_val == -1:
+    #     return 1
+    # else:
+    #     return 0
+    if ret_val == 0:
+        return 0
+    elif ret_val == -1:
+        return 1
+    else:
+        if get_quotes(QUOTES_DIR, url):
             print("Failed")
             return 1
-        if check_cache(QUOTES_DIR) == 1:
+        if check_cache(QUOTES_DIR) != 0:
             print("Failed")
             return 1
         return 0
-    else:
-        return 1
