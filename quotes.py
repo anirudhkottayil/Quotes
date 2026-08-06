@@ -2,7 +2,7 @@ import requests
 import json
 from init_check import init_check
 
-def last_quote_write(QUOTES_DIR):
+def last_quote_write(QUOTES_DIR) -> None:
     with open((QUOTES_DIR / "last_shown.jsonl"), "r+") as file:
         line = file.readline()
         if line == '':
@@ -15,11 +15,27 @@ def last_quote_write(QUOTES_DIR):
                 f.write(json.dumps(content) + '\n')
         except OSError as e:
             print(f"Write failed: {e}")
+        else:
+            file.truncate(0)
+            print("Quote Saved")
 
-        file.truncate(0)
-    print("Quote Saved")
+def user_add_quote(QUOTES_DIR) -> None:
+    line = {}
+    quote = input("Enter Quote: ")
+    if quote == "":
+        print("No input received")
+        return
+    author = input("Enter Author: ")
+    line["q"] = quote
+    line["a"] = author
+    try:
+        with open((QUOTES_DIR / "storage.jsonl"), "a") as file:
+            file.write(json.dumps(line) + '\n')
+    except OSError as e:
+        print(f"Write failed: {e}")
+    else:
+        print("Quote Saved")
 
-def user_add_quote(QUOTES_DIR):
 
 
 def main() -> None:
