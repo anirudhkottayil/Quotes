@@ -19,6 +19,16 @@ def last_quote_write(QUOTES_DIR) -> None:
             file.truncate(0)
             print("Quote Saved")
 
+
+def quote_exists(quote, author) -> int:
+    with open("test_storage.jsonl", "r") as file:
+        for line in file:
+            content = json.loads(line)
+            if content["a"].lower() == author.lower():
+                if content["q"].strip().lower() == quote.lower():
+                    return 1
+    return 0
+
 def user_add_quote(QUOTES_DIR) -> None:
     line = {}
     quote = input("Enter Quote: ")
@@ -26,6 +36,9 @@ def user_add_quote(QUOTES_DIR) -> None:
         print("No input received")
         return
     author = input("Enter Author: ")
+    if quote_exists(quote, author) == 1:
+        print("Quote already in storage")
+        return
     line["q"] = quote
     line["a"] = author
     try:
@@ -35,8 +48,6 @@ def user_add_quote(QUOTES_DIR) -> None:
         print(f"Write failed: {e}")
     else:
         print("Quote Saved")
-
-
 
 def main() -> None:
     url = "https://zenquotes.io/api/quotes"
