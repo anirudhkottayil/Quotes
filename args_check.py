@@ -1,4 +1,5 @@
 import json
+import random
 
 def last_quote_write(QUOTES_DIR) -> None:
     with open((QUOTES_DIR / "last_shown.jsonl"), "r+") as file:
@@ -47,11 +48,24 @@ def user_add_quote(QUOTES_DIR) -> None:
     else:
         print("Quote Saved")
 
+def print_random_quote(QUOTES_DIR) -> None:
+    quotes = []
+    with open((QUOTES_DIR / "storage.jsonl"), "r") as file:
+        for line in file:
+            line = line.strip()
+            if line:
+                quotes.append(json.loads(line))
+    quote = random.choice(quotes)
+    print(f"{quote["q"]} - {quote["a"]}")
+
+
 def args_run(args,QUOTES_DIR) -> int:
     if args.save:
         last_quote_write(QUOTES_DIR)
     if args.add:
         user_add_quote(QUOTES_DIR)
-    if args.save or args.add:
+    if args.random:
+        print_random_quote(QUOTES_DIR)
+    if args.save or args.add or args.random:
         return 1
     return 0
