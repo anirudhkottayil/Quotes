@@ -1,0 +1,19 @@
+<svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>quote — a terminal quote collector</title>
+<desc>A stylized terminal window showing the quote command being run and printing a quote by Marcus Aurelius, with a large decorative quotation mark in the background.</desc>
+<rect width="1200" height="320" fill="#14161C"/>
+<text x="0" y="330" font-family="Georgia, 'Times New Roman', serif" font-size="480" font-style="italic" fill="#EDEAE3" fill-opacity="0.05">&#8220;</text>
+<rect x="70" y="48" width="1060" height="224" rx="14" fill="#1B1E27" stroke="#2A2E3A" stroke-width="1.5"/>
+<path d="M 84 48 h 1032 a 14 14 0 0 1 14 14 v 24 h -1060 v -24 a 14 14 0 0 1 14 -14 z" fill="#20232E"/>
+<line x1="70" y1="86" x2="1130" y2="86" stroke="#2A2E3A" stroke-width="1"/>
+<circle cx="106" cy="67" r="6" fill="#3A3E4B"/>
+<circle cx="128" cy="67" r="6" fill="#3A3E4B"/>
+<circle cx="150" cy="67" r="6" fill="#3A3E4B"/>
+<text x="600" y="72" text-anchor="middle" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, monospace" font-size="14" fill="#6B7080">quote — zsh</text>
+<text x="106" y="146" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, monospace" font-size="30" font-weight="700" fill="#E8A33D">&#10095;</text>
+<text x="138" y="146" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, monospace" font-size="30" font-weight="700" fill="#EDEAE3"> quote</text>
+<text x="106" y="200" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, monospace" font-size="24" fill="#B39DDB">&#8220;The obstacle is the way.&#8221;</text>
+<text x="106" y="232" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, monospace" font-size="20" fill="#6B7080">&#8212; Marcus Aurelius</text>
+<text x="106" y="256" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas, monospace" font-size="30" font-weight="700" fill="#E8A33D">&#10095;</text>
+<rect x="126" y="243" width="14" height="24" fill="#E8A33D"/>
+</svg>
