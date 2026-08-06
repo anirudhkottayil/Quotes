@@ -5,7 +5,7 @@ def quote_exists(QUOTES_DIR,quote, author) -> int:
     with open((QUOTES_DIR / "storage.jsonl"), "r") as file:
         for line in file:
             content = json.loads(line)
-            if content["a"].lower() == author.lower():
+            if content["a"].strip().lower() == author.strip().lower():
                 if content["q"].strip().lower() == quote.strip().lower():
                     return 1
     return 0
@@ -20,6 +20,7 @@ def last_quote_write(QUOTES_DIR) -> None:
         content = json.loads(line)
         if quote_exists(QUOTES_DIR, content["q"], content["a"]) == 1:
             print("Quote already in storage")
+            file.truncate(0)
             return
         try:
             with open((QUOTES_DIR / "storage.jsonl"), "a") as f:

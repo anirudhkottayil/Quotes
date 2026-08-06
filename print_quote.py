@@ -1,20 +1,28 @@
 import requests
 import json
 import os
-from requests.exceptions import HTTPError, Timeout, RequestException
+from requests.exceptions import RequestException
 
 def get_quotes(QUOTES_DIR, url) -> int:
     try:
         r = requests.get(url, timeout=7)
         r.raise_for_status()
-    except (HTTPError, RequestException, Timeout) as e:
+    except RequestException as e:
         print(f"Get request failed: {e}")
         return 1
 
     try:
         quotes = r.json()
-    except ValueError:
+    except ValueError as e:
         quotes = None
+        print(f"Response not JSON: {e}")
+        return 1
+
+    if not isinstance(quotes, list):
+        print("Response not enclosed in list")
+        return 1
+    if quotes == []:
+        print("Response is empty")
         return 1
 
     if not (isinstance(quotes[0], dict) and isinstance(quotes[0].get("q"), str) and isinstance(quotes[0].get("a"), str)):
@@ -77,6 +85,6 @@ def print_quote(QUOTES_DIR, url):
         if check_cache(QUOTES_DIR) == 1:
             print("Failed")
             return 1
+        return 0
     else:
         return 1
-    return 0
