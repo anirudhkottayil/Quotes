@@ -39,7 +39,7 @@ def user_add_quote(QUOTES_DIR) -> None:
         return
     author = input("Enter Author: ").strip()
     if author == "":
-        author = "NULL"
+        author = "UNKOWN"
     if quote_exists(QUOTES_DIR, quote, author) == 1:
         print("Quote already in storage")
         return
@@ -64,7 +64,7 @@ def print_random_quote(QUOTES_DIR) -> None:
         print("No saved quotes to choose from")
         return
     quote = random.choice(quotes)
-    print(f"{quote["q"]} - {quote["a"]}")
+    print(f'{quote["q"]} - {quote["a"]}')
 
 
 def args_run(args,QUOTES_DIR) -> int:
