@@ -1,16 +1,25 @@
 import requests
 import json
 import os
+from requests.exceptions import HTTPError, Timeout, RequestException
 
 def get_quotes(QUOTES_DIR, url) -> int:
     try:
-        r = requests.get(url)
+        r = requests.get(url, timeout=7)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as e:
+    except (HTTPError, RequestException, Timeout) as e:
         print(f"Get request failed: {e}")
         return 1
 
-    quotes = r.json()
+    try:
+        quotes = r.json()
+    except ValueError:
+        quotes = None
+        return 1
+
+    if not (isinstance(quotes[0], dict) and isinstance(quotes[0].get("q"), str) and isinstance(quotes[0].get("a"), str)):
+        print("Response was not of the specified format")
+        return 1
     try:
         with open((QUOTES_DIR / "cache.jsonl"), "w") as file:
             for line in quotes:
@@ -21,9 +30,18 @@ def get_quotes(QUOTES_DIR, url) -> int:
     else:
         return 0
 
+def write_into_last_shown(QUOTES_DIR, content) -> int:
+    try:
+        with open((QUOTES_DIR / "last_shown.jsonl"), "w") as file:
+            file.write(json.dumps(content) + '\n')
+    except OSError as e:
+        print(f"Write into last shown failed: {e}")
+        return 1
+    return 0
+
 
 def check_cache(QUOTES_DIR) -> int:
-    with open(QUOTES_DIR / "cache.jsonl"), "r+b") as file:
+    with open((QUOTES_DIR / "cache.jsonl"), "r+b") as file:
         file.seek(0, os.SEEK_END)
         pos = file.tell()
 
@@ -36,7 +54,7 @@ def check_cache(QUOTES_DIR) -> int:
 
         while (pos > 0):
             file.seek(pos - 1)
-            if file.read(1) == '\n':
+            if file.read(1) == b'\n':
                 break
             pos -= 1
 
@@ -46,6 +64,8 @@ def check_cache(QUOTES_DIR) -> int:
         file.truncate()
 
         content = json.loads(line)
+        if write_into_last_shown(QUOTES_DIR, content):
+            return -1
         print(f"{content["q"]} - {content["a"]}")
         return 0
 
@@ -57,4 +77,6 @@ def print_quote(QUOTES_DIR, url):
         if check_cache(QUOTES_DIR) == 1:
             print("Failed")
             return 1
+    else:
+        return 1
     return 0

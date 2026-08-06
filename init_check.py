@@ -25,4 +25,4 @@ def init_check():
     if not (QUOTES_DIR / ".initialized").exists():
         init_files()
 
-     return [parse_args(), QUOTES_DIR]
+    return [parse_args(), QUOTES_DIR]

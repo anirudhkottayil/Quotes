@@ -1,6 +1,15 @@
 import json
 import random
 
+def quote_exists(QUOTES_DIR,quote, author) -> int:
+    with open((QUOTES_DIR / "storage.jsonl"), "r") as file:
+        for line in file:
+            content = json.loads(line)
+            if content["a"].lower() == author.lower():
+                if content["q"].strip().lower() == quote.strip().lower():
+                    return 1
+    return 0
+
 def last_quote_write(QUOTES_DIR) -> None:
     with open((QUOTES_DIR / "last_shown.jsonl"), "r+") as file:
         line = file.readline()
@@ -9,6 +18,9 @@ def last_quote_write(QUOTES_DIR) -> None:
             return
 
         content = json.loads(line)
+        if quote_exists(QUOTES_DIR, content["q"], content["a"]) == 1:
+            print("Quote already in storage")
+            return
         try:
             with open((QUOTES_DIR / "storage.jsonl"), "a") as f:
                 f.write(json.dumps(content) + '\n')
@@ -18,16 +30,6 @@ def last_quote_write(QUOTES_DIR) -> None:
             file.truncate(0)
             print("Quote Saved")
 
-
-def quote_exists(quote, author) -> int:
-    with open("test_storage.jsonl", "r") as file:
-        for line in file:
-            content = json.loads(line)
-            if content["a"].lower() == author.lower():
-                if content["q"].strip().lower() == quote.lower():
-                    return 1
-    return 0
-
 def user_add_quote(QUOTES_DIR) -> None:
     line = {}
     quote = input("Enter Quote: ")
@@ -35,7 +37,7 @@ def user_add_quote(QUOTES_DIR) -> None:
         print("No input received")
         return
     author = input("Enter Author: ")
-    if quote_exists(quote, author) == 1:
+    if quote_exists(QUOTES_DIR, quote, author) == 1:
         print("Quote already in storage")
         return
     line["q"] = quote
