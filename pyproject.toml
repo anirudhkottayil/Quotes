@@ -1,0 +1,14 @@
+[project]
+name = "quotecli"
+version = "0.1.0"
+dependencies = ["requests"]
+
+[project.scripts]
+quote = "quotes:main"
+
+[tool.setuptools]
+py-modules = ["quotes", "init_check", "args_check", "print_quote"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
