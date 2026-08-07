@@ -1,9 +1,9 @@
-import requests
 import json
 import os
 from requests.exceptions import RequestException
 
 def get_quotes(QUOTES_DIR, url) -> int:
+    import requests
     try:
         r = requests.get(url, timeout=7)
         r.raise_for_status()
