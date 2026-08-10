@@ -1,13 +1,13 @@
 [project]
 name = "quotecli"
 version = "0.1.0"
-dependencies = ["requests"]
+dependencies = ["requests", "windows-curses; platform_system == 'Windows'"]
 
 [project.scripts]
 quote = "quotes:main"
 
 [tool.setuptools]
-py-modules = ["quotes", "init_check", "args_check", "print_quote"]
+py-modules = ["quotes", "init_check", "args_check", "print_quote", "remover"]
 
 [build-system]
 requires = ["setuptools>=61.0"]
