@@ -76,7 +76,8 @@ def check_cache(QUOTES_DIR) -> int:
         file.seek(pos)
         file.truncate()
 
-        print(f'{content["q"]} - {content["a"]}')
+        print(f'\033[1;36m{content["q"]}\033[0m - \033[2m{content["a"]}\033[0m')
+        # print(f'{content["q"]} - {content["a"]}')
         return 0
 
 def print_quote(QUOTES_DIR, url):
