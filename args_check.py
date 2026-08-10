@@ -1,5 +1,6 @@
 import json
 import random
+from remover import remove_quote
 
 def quote_exists(QUOTES_DIR,quote, author) -> int:
     with open((QUOTES_DIR / "storage.jsonl"), "r") as file:
@@ -64,7 +65,8 @@ def print_random_quote(QUOTES_DIR) -> None:
         print("No saved quotes to choose from")
         return
     quote = random.choice(quotes)
-    print(f'{quote["q"]} - {quote["a"]}')
+    # print(f'{quote["q"]} - {quote["a"]}')
+    print(f'\033[1;36m{content["q"]}\033[0m - \033[2m{content["a"]}\033[0m')
 
 
 def args_run(args,QUOTES_DIR) -> int:
@@ -74,6 +76,10 @@ def args_run(args,QUOTES_DIR) -> int:
         user_add_quote(QUOTES_DIR)
     if args.random:
         print_random_quote(QUOTES_DIR)
-    if args.save or args.add or args.random:
+    if args.remove:
+        remove_quote(QUOTES_DIR, args.filter)
+    if args.filter and not args.remove:
+        print("--filter requires --remove")
+    if args.save or args.add or args.random or args.remove or args.filter:
         return 1
     return 0
