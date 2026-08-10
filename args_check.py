@@ -70,6 +70,8 @@ def print_random_quote(QUOTES_DIR) -> None:
 
 
 def args_run(args,QUOTES_DIR) -> int:
+    if args.where:
+        print(QUOTES_DIR)
     if args.save:
         last_quote_write(QUOTES_DIR)
     if args.add:
@@ -80,6 +82,6 @@ def args_run(args,QUOTES_DIR) -> int:
         remove_quote(QUOTES_DIR, args.filter)
     if args.filter and not args.remove:
         print("--filter requires --remove")
-    if args.save or args.add or args.random or args.remove or args.filter:
+    if args.save or args.add or args.random or args.remove or args.filter or args.where:
         return 1
     return 0

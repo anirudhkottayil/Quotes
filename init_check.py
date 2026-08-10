@@ -18,6 +18,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--random", action="store_true", help="To choose a random quote from personal list")
     parser.add_argument("--remove", action="store_true", help="To remove a quote from personal list")
     parser.add_argument("--filter", action="store_true", help="To remove a quote from a filtered personal list")
+    parser.add_argument("--where", action="store_true", help="To show the location of the saved quotes")
     return parser.parse_args()
 
 def init_check():
