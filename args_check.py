@@ -66,7 +66,7 @@ def print_random_quote(QUOTES_DIR) -> None:
         return
     quote = random.choice(quotes)
     # print(f'{quote["q"]} - {quote["a"]}')
-    print(f'\033[1;36m{content["q"]}\033[0m - \033[2m{content["a"]}\033[0m')
+    print(f'\033[1;36m{quote["q"]}\033[0m - \033[2m{quote["a"]}\033[0m')
 
 
 def args_run(args,QUOTES_DIR) -> int:
