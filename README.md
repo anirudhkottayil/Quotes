@@ -16,12 +16,12 @@
 
 ## Features
 
-- 🔁 Pulls quotes from ZenQuotes in batches of 50 and caches them locally — most runs never touch the network
-- 💾 `--save` keeps the last quote you saw, checked against duplicates before it's written
-- ✍️ `--add` lets you type in your own quotes
-- 🗑️ `--remove` opens a picker to delete a quote from your collection — add `--filter` to search by author or text first instead of scrolling through everything
-- 🎲 `--random` pulls a random quote from your personal collection
-- 📦 No config, no server, no accounts — one command, one local folder
+-  Pulls quotes from ZenQuotes in batches of 50 and caches them locally — most runs never touch the network
+-  `--save` keeps the last quote you saw, checked against duplicates before it's written
+-  `--add` lets you type in your own quotes
+-  `--remove` opens a picker to delete a quote from your collection — add `--filter` to search by author or text first instead of scrolling through everything
+-  `--random` pulls a random quote from your personal collection
+-  No config, no server, no accounts — one command, one local folder
 
 ## Install
 
@@ -45,8 +45,6 @@ quote --remove --filter     # search first, then pick a quote to delete
 ## How it works
 
 Quotes come from ZenQuotes' batch endpoint, 50 at a time, stored locally as JSONL. Each run pops one from the cache; when it runs out, `quote` quietly refetches in the background. Anything you save goes into a separate personal file, checked against what's already there so nothing gets duplicated.
-
-`--remove` opens an interactive picker over that personal file — scroll with the arrow keys or j/k, enter to delete. `--filter` asks for an author or a bit of quote text first, so you're choosing from a few matches instead of paging through your whole collection.
 
 ## Data
 
